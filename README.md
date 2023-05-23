@@ -17,7 +17,7 @@ Current Features:
 ### For building the app
 * [Install Docker](https://docs.docker.com/get-docker/)
 * For Linux hosts, install the Ledger Nano [udev rules](https://github.com/LedgerHQ/udev-rules)
-#### Build the [Ledger App Builder](https://developers.ledger.com/docs/nano-app/build/) Docker image
+#### Build the [Ledger App Builder](https://developers.ledger.com/docs/embedded-app/intro-build-load/) Docker image
 1. Clone the git repository
 ```
 git clone https://github.com/LedgerHQ/ledger-app-builder.git
@@ -83,7 +83,7 @@ git clone --branch 1.0.3 --depth 1 https://github.com/LedgerHQ/nanosplus-secure-
 * Solana [system dependencies](https://github.com/solana-labs/solana/#1-install-rustc-cargo-and-rustfmt)
 
 ## Build
-It is highly recommended that you read and understand the [Ledger App Builder](https://developers.ledger.com/docs/nano-app/build/)
+It is highly recommended that you read and understand the [Ledger App Builder](https://developers.ledger.com/docs/embedded-app/build-app/)
 build process before proceeding.  A convenience wrapper script (`./docker-make`) has been provided for simplicity
 
 `docker-make` manages the current target SDK for you, automatically setting `BOLOS_SDK` to the
@@ -130,6 +130,14 @@ First enable `blind-signing` in the App settings
 cargo run --manifest-path tests/Cargo.toml
 ```
 ### Python
+Make sure you built app first using ./docker-make.
+
+Install
+```bash
+sudo apt-get update && sudo apt-get install -y qemu-user-static # Apt deps
+pip install --extra-index-url https://test.pypi.org/simple/ -r tests/python/requirements.txt # Python deps
+```
+Run
 ```bash
 ./python-test.sh <target_device>
 ```
