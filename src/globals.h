@@ -43,8 +43,7 @@
 typedef enum InstructionCode {
     InsGetAppConfiguration = 0x01,
     InsGetPubkey = 0x02,
-    InsSignMessage = 0x03,
-    InsGetTxResult = 0x04,
+    InsSignTransfer = 0x03,
 } InstructionCode;
 
 // display stepped screens

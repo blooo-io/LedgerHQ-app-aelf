@@ -24,9 +24,6 @@ int process_message_body(const uint8_t* message_body, int message_body_length, i
         case 3:  // TRANSFER
             parse_system_transfer_instruction(&parser, &instruction, &info->transfer);
             break;
-        case 4:  // GET TX RESULT
-            parse_system_get_tx_result_instruction(&parser, &instruction, &info->getTxResult);
-            break;
     };
 
     display_instruction_info[display_instruction_count++] = info;
@@ -36,8 +33,6 @@ int process_message_body(const uint8_t* message_body, int message_body_length, i
     switch (ins_code) {
         case 3:  // TRANSFER
             return print_system_transfer_info(&display_instruction_info[0]->transfer);
-        case 4:  // GET TX RESULT
-            return print_system_get_tx_result_info(&display_instruction_info[0]->getTxResult);
     };
     return 1;
 }
