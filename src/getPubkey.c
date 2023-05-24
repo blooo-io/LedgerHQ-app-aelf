@@ -53,7 +53,7 @@ void handle_get_pubkey(volatile unsigned int *flags, volatile unsigned int *tx) 
     }
 
     get_public_key(G_publicKey, G_command.derivation_path, G_command.derivation_path_length);
-    encode_base58(G_publicKey, PUBKEY_LENGTH, G_publicKeyStr, BASE58_PUBKEY_LENGTH);
+    PRINTF("pub : %d", G_publicKey);
 
     if (G_command.non_confirm) {
         *tx = set_result_get_pubkey();

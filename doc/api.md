@@ -93,35 +93,6 @@ _This command signs a Aelf Transaction after having the user validate the transa
 | ------------- | :------: |
 | Signature     |    64    |
 
-### SIGN Aelf Get Tx Result
-
-#### Description
-
-_This command signs a Aelf Transaction after having the user validate the transaction-specific parameters:_
-
-##### Command
-
-| _CLA_ | _INS_ | _P1_ | _P2_ |   _Lc_   |     _Le_ |
-| ----- | :---: | ---: | ---- | :------: | -------: |
-| E0    |  04   |   01 | 00   | variable | variable |
-
-##### Input data
-
-| _Description_                                       | _Length_ |
-| --------------------------------------------------- | :------: |
-| Number of signers (derivation paths) (always 1)     |    1     |
-| Number of BIP 32 derivations to perform (2, 3 or 4) |    1     |
-| First derivation index (big endian)                 |    4     |
-| ...                                                 |    4     |
-| Last derivation index (big endian)                  |    4     |
-| Serialized transaction                              | variable |
-
-##### Output data
-
-| _Description_ | _Length_ |
-| ------------- | :------: |
-| Signature     |    64    |
-
 ## Transport protocol
 
 ### General transport description

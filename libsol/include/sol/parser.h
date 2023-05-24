@@ -74,6 +74,8 @@ int parse_message_header(Parser* parser, MessageHeader* header);
 
 int parse_data(Parser* parser, const uint8_t** data, size_t* data_length);
 
+int parse_transfer(Parser* parser);
+
 // FIXME: I don't belong here
 static inline bool pubkeys_equal(const Pubkey* pubkey1, const Pubkey* pubkey2) {
     return memcmp(pubkey1, pubkey2, PUBKEY_SIZE) == 0;

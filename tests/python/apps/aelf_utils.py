@@ -30,14 +30,14 @@ FEES_BYTES      = decimal_to_bytes(FEES)
 
 ### Proposed foreign and owned addresses ###
 
-FOREIGN_ADDRESS     = b'mzHN2JLMryw6mPMm3T4Yt9G2mLhFifJinj3tzLQ5Rhv1sJ3aJ'
-FOREIGN_PUBLIC_KEY  = base58.b58decode_check(FOREIGN_ADDRESS)
+FOREIGN_PUBLIC_KEY     = b'mzHN2JLMryw6mPMm3T4Yt9G2mLhFifJinj3tzLQ5Rhv1sJ3aJ'
+# FOREIGN_PUBLIC_KEY  = base58.b58decode_check(FOREIGN_ADDRESS)
 
 FOREIGN_ADDRESS_2       = b'CRuQygxHeZLvfMFLbZQVvs6DMeWe3Jn9m3yDiCF5JgmdWAiLN'
 FOREIGN_PUBLIC_KEY_2    = base58.b58decode_check(FOREIGN_ADDRESS_2)
 
-OWNED_ADDRESS       = b'CRuQygxHeZLvfMFLbZQVvs6DMeWe3Jn9m3yDiCF5JgmdWAiLN'
-OWNED_PUBLIC_KEY    = base58.b58decode_check(OWNED_ADDRESS)
+OWNED_PUBLIC_KEY       = b'CRuQygxHeZLvfMFLbZQVvs6DMeWe3Jn9m3yDiCF5JgmdWAiLN'
+# OWNED_PUBLIC_KEY    = base58.b58decode_check(OWNED_ADDRESS)
 
 ### Proposed AELF derivation paths for tests ###
 

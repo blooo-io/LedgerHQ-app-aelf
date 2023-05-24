@@ -30,10 +30,11 @@ static void reset_main_globals(void) {
 }
 
 void handleApdu(volatile unsigned int *flags, volatile unsigned int *tx, int rx) {
+    PRINTF("SLI");
     if (!flags || !tx) {
         THROW(ApduReplySdkInvalidParameter);
     }
-
+    PRINTF("SLI1");
     if (rx < 0) {
         THROW(ApduReplySdkExceptionIoOverflow);
     }
@@ -46,6 +47,7 @@ void handleApdu(volatile unsigned int *flags, volatile unsigned int *tx, int rx)
         THROW(ApduReplySuccess);
     }
     switch (G_command.instruction) {
+        PRINTF("commmando %d\n", G_command.instruction);
         case InsGetAppConfiguration:
             G_io_apdu_buffer[0] = N_storage.settings.allow_blind_sign;
             G_io_apdu_buffer[1] = N_storage.settings.pubkey_display;
@@ -78,7 +80,7 @@ void app_main(void) {
     // multiple APDUs before they become complete and executed.
     reset_getpubkey_globals();
     reset_main_globals();
-
+    PRINTF("SLI3");
     // DESIGN NOTE: the bootloader ignores the way APDU are fetched. The only
     // goal is to retrieve APDU.
     // When APDU are to be fetched from multiple IOs, like NFC+USB+BLE, make
