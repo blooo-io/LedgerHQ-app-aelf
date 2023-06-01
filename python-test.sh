@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 device_label=$1 # "nanos", "nanox", "nanosp"
-mv bin/app.elf bin/aelf_${device_label}.elf
+cp build/${device_label}/bin/app.elf bin/aelf_${device_label}.elf
 mkdir tests/elfs
 cp bin/*.elf tests/elfs
 
