@@ -22,7 +22,7 @@ typedef struct SystemTransferInfo {
     SizedString method_name;
     const Pubkey* dest;
     SizedString ticker;
-    uint32_t amount;
+    uint64_t amount;
     SizedString memo;
 } SystemTransferInfo;
 
