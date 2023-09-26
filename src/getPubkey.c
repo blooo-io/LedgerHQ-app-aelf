@@ -15,7 +15,8 @@ void reset_getpubkey_globals(void) {
 
 int find_address_length() {
     int i;
-    for (i = 0; G_addressStr[i] != '\0' && i < BASE58_CHECK_PUBKEY_LENGTH - 1; ++i);
+    for (i = 0; G_addressStr[i] != '\0' && i < BASE58_CHECK_PUBKEY_LENGTH - 1; ++i)
+        ;
     return i;
 }
 

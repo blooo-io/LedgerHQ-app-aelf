@@ -98,9 +98,11 @@ int print_string(const char *in, char *out, size_t out_length) {
     return rc;
 }
 
-
-int compute_address(const uint8_t *pubkey, size_t pubkey_length, char *address, size_t address_length) {
-    if(pubkey_length < PUBKEY_LENGTH || address_length < BASE58_CHECK_PUBKEY_LENGTH) {
+int compute_address(const uint8_t *pubkey,
+                    size_t pubkey_length,
+                    char *address,
+                    size_t address_length) {
+    if (pubkey_length < PUBKEY_LENGTH || address_length < BASE58_CHECK_PUBKEY_LENGTH) {
         return INVALID_PARAMETER;
     }
     uint8_t intermediate_hash[CX_SHA256_SIZE];

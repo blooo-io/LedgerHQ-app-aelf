@@ -28,7 +28,10 @@ int print_string(const char *in, char *out, size_t out_length);
 
 int print_pubkey(const uint8_t *in, char *out, size_t out_length);
 
-int compute_address(const uint8_t *pubkey, size_t pubkey_length, char *address, size_t address_length);
+int compute_address(const uint8_t *pubkey,
+                    size_t pubkey_length,
+                    char *address,
+                    size_t address_length);
 
 int print_summary(const char *in,
                   char *out,
