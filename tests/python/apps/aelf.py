@@ -72,11 +72,11 @@ class AelfClient:
 
 
     def get_public_key(self, derivation_path: bytes) -> bytes:
-        public_key: RAPDU = self._client.exchange(CLA, INS.INS_GET_PUBKEY,
+        public_key_and_address: RAPDU = self._client.exchange(CLA, INS.INS_GET_PUBKEY,
                                                   P1_NON_CONFIRM, P2_NONE,
                                                   derivation_path)
-        assert len(public_key.data) == PUBLIC_KEY_LENGTH, "'from' public key size incorrect"
-        return public_key.data
+        assert public_key_and_address.data[0] == 65, "'from' public key size incorrect"
+        return public_key_and_address.data[1:66]
 
 
     def split_and_prefix_message(self, derivation_path : bytes, message: bytes) -> List[bytes]:

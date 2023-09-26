@@ -5,6 +5,7 @@
 #include "aelf/printer.h"
 #include "util.h"
 #include "cx.h"
+#include "globals.h"
 
 // max amount is max uint64 scaled down: "18446744073.709551615"
 #define AMOUNT_MAX_SIZE 22
@@ -95,6 +96,21 @@ int print_string(const char *in, char *out, size_t out_length) {
         }
     }
     return rc;
+}
+
+
+int compute_address(const uint8_t *pubkey, size_t pubkey_length, char *address, size_t address_length) {
+    if(pubkey_length < PUBKEY_LENGTH || address_length < BASE58_CHECK_PUBKEY_LENGTH) {
+        return INVALID_PARAMETER;
+    }
+    uint8_t intermediate_hash[CX_SHA256_SIZE];
+    uint8_t hash[CX_SHA256_SIZE];
+    cx_hash_sha256(pubkey, PUBKEY_LENGTH, intermediate_hash, CX_SHA256_SIZE);
+    cx_hash_sha256(intermediate_hash, CX_SHA256_SIZE, hash, CX_SHA256_SIZE);
+    char tmp_buf[BASE58_CHECK_PUBKEY_LENGTH];
+    BAIL_IF(encode_base58_check(hash, CX_SHA256_SIZE, tmp_buf, sizeof(tmp_buf)));
+    memmove(address, tmp_buf, BASE58_CHECK_PUBKEY_LENGTH);
+    return 0;
 }
 
 int print_pubkey(const uint8_t *in, char *out, size_t out_length) {

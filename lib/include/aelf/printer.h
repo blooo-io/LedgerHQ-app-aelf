@@ -7,8 +7,7 @@
 #define SUMMARY_LENGTH             7
 #define TITLE_SIZE                 32
 #define BASE58_PUBKEY_LENGTH       45
-#define BASE58_CHECK_PUBKEY_LENGTH 49
-#define HEX_PUBKEY_LENGTH          (PUBKEY_LENGTH * 2)
+#define BASE58_CHECK_PUBKEY_LENGTH 51
 #define BASE58_PUBKEY_SHORT        (SUMMARY_LENGTH + 2 + SUMMARY_LENGTH + 1)
 
 int print_token_amount(uint64_t amount,
@@ -28,6 +27,8 @@ int print_sized_string(const SizedString *string, char *out, size_t out_length);
 int print_string(const char *in, char *out, size_t out_length);
 
 int print_pubkey(const uint8_t *in, char *out, size_t out_length);
+
+int compute_address(const uint8_t *pubkey, size_t pubkey_length, char *address, size_t address_length);
 
 int print_summary(const char *in,
                   char *out,

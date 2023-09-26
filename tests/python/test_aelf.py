@@ -4,13 +4,14 @@ from ragger.utils import RAPDU
 
 from .apps.aelf import AelfClient, ErrorType
 from .apps.aelf_cmd_builder import verify_signature
-from .apps.aelf_utils import FOREIGN_PUBLIC_KEY, FOREIGN_PUBLIC_KEY_2, CHAIN_PUBLIC_KEY, AMOUNT, AMOUNT_2, TICKER, REF_BLOCK_NUMBER, METHOD_NAME, ELF_PACKED_DERIVATION_PATH, ELF_PACKED_DERIVATION_PATH_2
+from .apps.aelf_utils import pubkey_to_address, FOREIGN_PUBLIC_KEY, FOREIGN_PUBLIC_KEY_2, CHAIN_PUBLIC_KEY, AMOUNT, AMOUNT_2, TICKER, REF_BLOCK_NUMBER, METHOD_NAME, ELF_PACKED_DERIVATION_PATH, ELF_PACKED_DERIVATION_PATH_2
 
 from .utils import ROOT_SCREENSHOT_PATH
 
 def test_aelf_get_public_key_ok(backend, navigator, test_name):
     aelf = AelfClient(backend)
     from_public_key = aelf.get_public_key(ELF_PACKED_DERIVATION_PATH_2)
+    address = pubkey_to_address(from_public_key)
 
     with aelf.send_public_key_with_confirm(ELF_PACKED_DERIVATION_PATH_2):
         if backend.firmware.device.startswith("nano"):
@@ -29,7 +30,7 @@ def test_aelf_get_public_key_ok(backend, navigator, test_name):
                                             test_name,
                                             instructions)
 
-    assert aelf.get_async_response().data == from_public_key
+    assert aelf.get_async_response().data == b'\x41' + from_public_key + len(address).to_bytes(1, 'big') + address
 
 def test_aelf_simple_transfer_txn_ok(backend, navigator, test_name):
     aelf = AelfClient(backend)
