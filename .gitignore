@@ -6,7 +6,6 @@ dev-env
 src/glyphs.c
 src/glyphs.h
 .idea
-.devcontainer
 gitignore
 .vagrant
 lib/target
@@ -20,3 +19,4 @@ __pycache__
 
 tests/elfs/
 tests/python/snapshots-tmp/
+.DS_Store

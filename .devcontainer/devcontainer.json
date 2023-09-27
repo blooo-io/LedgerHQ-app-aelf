@@ -1,0 +1,4 @@
+{
+	"image": "ghcr.io/ledgerhq/ledger-app-builder/ledger-app-dev-tools:latest",
+	"postCreateCommand": "apk add gcc musl-dev python3-dev && pip install -r tests/python/requirements.txt"
+}
