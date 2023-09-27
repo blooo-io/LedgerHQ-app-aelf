@@ -47,6 +47,22 @@ def test_aelf_simple_transfer_txn_ok(backend, navigator, test_name):
 
     verify_signature(from_public_key, message, signature)
 
+def test_aelf_long_memo_transfer_txn_ok(backend, navigator, test_name):
+    aelf = AelfClient(backend)
+    from_public_key = aelf.get_public_key(ELF_PACKED_DERIVATION_PATH_2)
+    # Create instruction
+    message: bytes = bytearray.fromhex("0a220a20d736f33c7c2a35a04603fd3e94d5395c29edd9ac159bed03e366c8fb700b7d1812220a202791e992a57f28e75a11f13af2c0aec8b0eb35d2f048d42eba8901c92e0378dc18b1e8fb552204b05922512a085472616e7366657232710a220a204ff4e63ad4aa7ec92e65ba2d37b2c56b3f82390bfc25e66cebab6821f3b05c0b1203454c461880d4dbd20f22404c6f72656d20497073756d2069732073696d706c792064756d6d792074657874206f6620746865207072696e74696e6720616e64207479706573657474696e67")
+
+    with aelf.send_async_sign_transfer(ELF_PACKED_DERIVATION_PATH_2, message):
+        navigator.navigate_until_text_and_compare(NavInsID.RIGHT_CLICK,
+                                                  [NavInsID.BOTH_CLICK],
+                                                  "Approve",
+                                                  ROOT_SCREENSHOT_PATH,
+                                                  test_name)
+    signature: bytes = aelf.get_async_response().data
+
+    verify_signature(from_public_key, message, signature)
+
 def test_aelf_simple_transfer_43_elf_txn_ok(backend, navigator, test_name):
     aelf = AelfClient(backend)
     from_public_key = aelf.get_public_key(ELF_PACKED_DERIVATION_PATH_2)
