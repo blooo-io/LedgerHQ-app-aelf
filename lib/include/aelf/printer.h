@@ -9,6 +9,7 @@
 #define BASE58_PUBKEY_LENGTH       45
 #define BASE58_CHECK_PUBKEY_LENGTH 51
 #define BASE58_PUBKEY_SHORT        (SUMMARY_LENGTH + 2 + SUMMARY_LENGTH + 1)
+#define MEMO_LENGTH                65  // 64 + \0
 
 int print_token_amount(uint64_t amount,
                        const char *asset,

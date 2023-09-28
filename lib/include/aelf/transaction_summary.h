@@ -64,7 +64,7 @@ struct SummaryItem {
 typedef struct SummaryItem SummaryItem;
 
 extern char G_transaction_summary_title[TITLE_SIZE];
-#define TEXT_BUFFER_LENGTH BASE58_PUBKEY_LENGTH
+#define TEXT_BUFFER_LENGTH MEMO_LENGTH
 extern char G_transaction_summary_text[TEXT_BUFFER_LENGTH];
 
 void transaction_summary_reset();
