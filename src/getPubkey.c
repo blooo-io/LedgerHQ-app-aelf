@@ -6,16 +6,33 @@
 #include "aelf/printer.h"
 
 static uint8_t G_publicKey[PUBKEY_LENGTH];
-static char G_publicKeyStr[HEX_PUBKEY_LENGTH];
+static char G_addressStr[BASE58_CHECK_PUBKEY_LENGTH];
 
 void reset_getpubkey_globals(void) {
     MEMCLEAR(G_publicKey);
-    MEMCLEAR(G_publicKeyStr);
+    MEMCLEAR(G_addressStr);
+}
+
+int find_address_length() {
+    int i;
+    for (i = 0; G_addressStr[i] != '\0' && i < BASE58_CHECK_PUBKEY_LENGTH - 1; ++i)
+        ;
+    return i;
 }
 
 static uint8_t set_result_get_pubkey() {
-    memcpy(G_io_apdu_buffer, G_publicKey, PUBKEY_LENGTH);
-    return PUBKEY_LENGTH;
+    uint32_t tx = 0;
+    G_io_apdu_buffer[tx++] = PUBKEY_LENGTH;
+    memmove(G_io_apdu_buffer + tx, G_publicKey, PUBKEY_LENGTH);
+    tx += PUBKEY_LENGTH;
+
+    int address_length = find_address_length();
+
+    G_io_apdu_buffer[tx++] = address_length;
+    memmove(G_io_apdu_buffer + tx, G_addressStr, address_length);
+    tx += address_length;
+
+    return tx;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -23,8 +40,8 @@ static uint8_t set_result_get_pubkey() {
 UX_STEP_NOCB(ux_display_public_flow_5_step,
              bnnn_paging,
              {
-                 .title = "Pubkey",
-                 .text = G_publicKeyStr,
+                 .title = "Address",
+                 .text = G_addressStr,
              });
 UX_STEP_CB(ux_display_public_flow_6_step,
            pb,
@@ -53,7 +70,7 @@ void handle_get_pubkey(volatile unsigned int *flags, volatile unsigned int *tx) 
     }
 
     get_public_key(G_publicKey, G_command.derivation_path, G_command.derivation_path_length);
-    print_pubkey(G_publicKey, G_publicKeyStr, PUBKEY_LENGTH);
+    compute_address(G_publicKey, PUBKEY_LENGTH, G_addressStr, BASE58_CHECK_PUBKEY_LENGTH);
 
     if (G_command.non_confirm) {
         *tx = set_result_get_pubkey();

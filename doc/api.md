@@ -60,9 +60,12 @@ _This command returns a Aelf pubkey for the given BIP 32 path_
 
 ##### Output data
 
-| _Description_ | _Length_ |
-| ------------- | :------: |
-| Pubkey        |    32    |
+| _Description_           | _Length_ |
+| ----------------------- | :------: |
+| Public Key Length       |    1     |
+| Uncompressed Public Key |    65    |
+| Address Length          |    1     |
+| Base58 Address          |   var    |
 
 ### SIGN Aelf Transfer
 
@@ -91,7 +94,7 @@ _This command signs a Aelf Transaction after having the user validate the transa
 
 | _Description_ | _Length_ |
 | ------------- | :------: |
-| Signature     |    64    |
+| Signature     |    65    |
 
 ### SIGN Aelf Get Tx Result
 

@@ -1,5 +1,5 @@
 import base58
-
+import hashlib
 from ragger.bip import pack_derivation_path
 from ragger.utils import create_currency_config
 
@@ -15,6 +15,10 @@ def decimal_to_bytes(decimal: int) -> str:
         hex = "0" + hex
     return bytes.fromhex(hex)
 
+def pubkey_to_address(pubkey: bytes) -> bytes:
+    h1 = hashlib.sha256(pubkey).digest()
+    h2 = hashlib.sha256(h1).digest()
+    return base58.b58encode_check(h2)
 
 ### Proposed values for fees and amounts ###
 
