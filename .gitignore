@@ -17,6 +17,6 @@ __pycache__
 .pyc
 *~
 
-tests/elfs/
+tests/elfs/*.elf
 tests/python/snapshots-tmp/
 .DS_Store
