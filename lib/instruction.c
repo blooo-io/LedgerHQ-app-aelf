@@ -99,10 +99,11 @@ int parse_system_transfer_instruction(Parser* parser, SystemTransferInfo* info) 
                     readVarInt(parser, &length);
                     BAIL_IF(parse_pubkey(parser, &info->to));
 
-                    const Pubkey sm_address = SMART_CONTRACT_ADDRESS;
+                    // TODO: Implement contract address validation for mainchain and sidechains on mainnet and testnet.
+                    /* const Pubkey sm_address = SMART_CONTRACT_ADDRESS;
                     if (!pubkeys_equal(info->to, &sm_address)) {
                         THROW(ApduReplyAelfWrongSmartContractAddress);
-                    }
+                    } */
                 }
                 break;
             case 3:
